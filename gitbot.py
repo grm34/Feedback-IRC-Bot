@@ -98,15 +98,13 @@ def update_api():
                                                      .replace("T", "-")\
                                                      .replace("Z", "")+"]"
             hour_utc = temp.split("-")[1].split(":")[0]
-            if (hour_utc == "21"):
+            if (hour_utc == "22"):
                 hour_fr = "00"
-            elif (hour_utc == "22"):
-                hour_fr = "01"
             elif (hour_utc == "23"):
-                hour_fr = "02"
+                hour_fr = "01"
             else:
                 hour_fr = int(hour_utc)+2
-                hours = "3 4 5 6 7 8 9"
+                hours = "2 3 4 5 6 7 8 9"
                 if str(hour_fr) in hours:
                     hour_fr = "0%s" % hour_fr
             date = temp.replace(hour_utc, str(hour_fr))
