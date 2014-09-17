@@ -12,7 +12,7 @@ from BeautifulSoup import BeautifulSoup
 from urllib2 import (urlopen, HTTPError, URLError)
 from django.utils.encoding import (smart_str, smart_unicode)
 
-bot_owner = ''
+bot_owner = '' # maybe you ! :p
 network = ''
 port = 6667
 chan = '#test'
