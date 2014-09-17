@@ -18,20 +18,20 @@ port = 6667
 chan = '#test'
 nick = 'prebot'
 name = 'P2P News Feedback'
-password = ''
-kill_bot = ''
-msgqueue = []
+password = '' # nickserv password
+kill_bot = '' # When screen in use... 'screen -X -S screen_name kill'
+msgqueue = [] # please, leave this empty ! :p
 hist = os.environ.get("HOME")+"/prebot/hist.entry"
 
-PRE = ""
-SCC = ""
-GFT = ""
+PRE = "" # PRE Announce from : https://pre.corrupt-net.org/ passkey needed !
+SCC = "" # what's this ?
+GFT = "" # what's that ?
 ST_EU = "https://www.sous-titres.eu/films.xml"
 SUBSCENE = "http://v2.subscene.com/subtitles/french/historybylanguage.aspx"
 SUBSYNC = "http://www.subsynchro.com/les-20-derniers-sous-titres-ajoutes.xml"
 OPENSUB = "http://www.opensubtitles.org/fr/search/sublanguageid-fre/searchonlymovies-on/rss_2_00"
-HDT = ""
-CHD = ""
+HDT = "" # who's this ?
+CHD = "" # who's that ?
 
 def update_sources():
     get_hist = open(hist, "r")
