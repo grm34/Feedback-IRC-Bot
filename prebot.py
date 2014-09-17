@@ -59,10 +59,11 @@ def update_sources():
                     hour_fr = "0%s" % hour_fr
             pubdate = pretime.replace(hour_utc, str(hour_fr))
             value = re.search(r'S[0-9]{2}E[0-9]{2}', title)
+            verif = "[PRE] %s" % title
             if (value is None) and ((cat == "DVDR" or cat == "BLURAY")\
                     or (cat == "X264" and "bluray" in title.lower())):
                 id = "[PRE] %s [ %s ] %s" % (title, size, pubdate)
-                if (id.lower() not in filetext.lower()):
+                if (verif.lower() not in filetext.lower()):
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
