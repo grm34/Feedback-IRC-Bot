@@ -26,12 +26,12 @@ hist = os.environ.get("HOME")+"/prebot/hist.entry"
 PRE = "" # PRE Announce from : https://pre.corrupt-net.org/ passkey needed !
 SCC = "" # what's this ?
 GFT = "" # what's that ?
+HDT = "" # who's this ?
+CHD = "" # who's that ?
 ST_EU = "https://www.sous-titres.eu/films.xml"
 SUBSCENE = "http://v2.subscene.com/subtitles/french/historybylanguage.aspx"
 SUBSYNC = "http://www.subsynchro.com/les-20-derniers-sous-titres-ajoutes.xml"
 OPENSUB = "http://www.opensubtitles.org/fr/search/sublanguageid-fre/searchonlymovies-on/rss_2_00"
-HDT = "" # who's this ?
-CHD = "" # who's that ?
 
 def update_sources():
     get_hist = open(hist, "r")
