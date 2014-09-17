@@ -13,6 +13,6 @@ https://developer.github.com/v3/activity/events/types/
 
 Feedback IRC bot based on [wookie](https://github.com/c0ding/wookie) for P2P specifics news...
 
-* New subtitles on st-eu, subsync, opensub, subscene
-* New HD/DVDR movies torrents of your favorites trackers
-* Specific PRE announce
+* Return subtitles of st-eu, subsync, opensub, subscene
+* Return X264/BLURAY/DVDR movies torrents of your favorites trackers
+* Return X264/BLURAY/DVDR PRE announce
