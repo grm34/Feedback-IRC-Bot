@@ -3,7 +3,7 @@ Feedback-IRC-Bots
 
 ## gitbot
 
-Feedback IRC bot based on [wookie](https://github.com/c0ding/wookie) for gitbot repository API Events...
+Feedback IRC bot based on [wookie](https://github.com/c0ding/wookie) for github repository API Events...
 
 https://developer.github.com/v3/activity/events/types/
 
