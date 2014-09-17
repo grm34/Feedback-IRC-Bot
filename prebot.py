@@ -62,7 +62,7 @@ def update_sources():
             if (value is None) and ((cat == "DVDR" or cat == "BLURAY")\
                     or (cat == "X264" and "bluray" in title.lower())):
                 id = "[PRE] %s [ %s ] %s" % (title, size, pubdate)
-                if (id not in filetext):
+                if (id.lower() not in filetext.lower()):
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
@@ -73,7 +73,7 @@ def update_sources():
             title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
             id = "[SCC] %s : %s" % (title, link)
-            if (id not in filetext):
+            if (id.lower() not in filetext.lower()):
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
@@ -84,7 +84,7 @@ def update_sources():
             title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
             id = "[GFT] %s : %s" % (title, link)
-            if (id not in filetext):
+            if (id.lower() not in filetext.lower()):
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
@@ -95,7 +95,7 @@ def update_sources():
             title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
             id = "[ST-EU] %s : %s" % (title, link)
-            if (id not in filetext):
+            if (id.lower() not in filetext.lower()):
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
@@ -107,7 +107,7 @@ def update_sources():
             title = data.get('title').split('-')[1].strip()
             link = "http://subscene.com%s" % data.get('href').strip()
             id = "[SUBSCENE] %s : %s" % (smart_str(title), smart_str(link))
-            if (id not in filetext):
+            if (id.lower() not in filetext.lower()):
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
@@ -118,7 +118,7 @@ def update_sources():
             title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
             id = "[SUBSYNC] %s : %s" % (title, link)
-            if (id not in filetext):
+            if (id.lower() not in filetext.lower()):
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
@@ -129,7 +129,7 @@ def update_sources():
             title = smart_str(entry.title).split('-')[0].strip()
             link = smart_str(entry.link).strip()
             id = "[OPENSUB] %s : %s" % (title, link)
-            if (id not in filetext):
+            if (id.lower() not in filetext.lower()):
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
@@ -142,7 +142,7 @@ def update_sources():
             if ("1080p" in title and "XXX" not in title)\
                     and ("bluray" in title.lower() or "blu-ray" in title.lower()):
                 id = "[HDT] %s : %s" % (title, link)
-                if (id not in filetext):
+                if (id.lower() not in filetext.lower()):
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
@@ -154,7 +154,7 @@ def update_sources():
             link = smart_str(entry.link).strip()
             if ("HDTV" not in title and "PDTV" not in title):
                 id = "[CHD] %s : %s" % (title, link)
-                if (id not in filetext):
+                if (id.lower() not in filetext.lower()):
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
