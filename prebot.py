@@ -117,9 +117,10 @@ def update_sources():
         subsync = feedparser.parse(SUBSYNC)
         for entry in subsync.entries:
             title = smart_str(entry.title).strip()
-            link = smart_str(entry.link).strip()
-            id = "[SUBSYNC] %s : %s" % (title, link)
-            if (id.lower() not in filetext.lower()):
+            verif = "[SUBSYNC] %s" % title
+            if (verif.lower() not in filetext.lower()):
+                link = smart_str(entry.link).strip()
+                id = "[SUBSYNC] %s : %s" % (title, link)                
                 get_hist = open(hist, "a")
                 get_hist.write("%s\n" % id)
                 get_hist.close()
