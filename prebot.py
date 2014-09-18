@@ -42,28 +42,28 @@ def update_sources():
         for entry in pre.entries:
             cat = smart_str(entry.title).split(']')[0].strip().replace('[', '')
             title = smart_str(entry.title).split(']')[1].strip()
-            size = smart_str(entry.description).replace('<br />', '')\
-                                               .replace('Size', ' | Size').strip()
-            pretime = smart_str(entry.published).replace('+0000', '').strip()
-            hour_utc = pretime.split(' ')[4].split(':')[0]
-            if (hour_utc == "21"):
-                hour_fr = "00"
-            elif (hour_utc == "22"):
-                hour_fr = "01"
-            elif (hour_utc == "23"):
-                hour_fr = "02"
-            else:
-                hour_fr = int(hour_utc)+3
-                hours = "3 4 5 6 7 8 9"
-                if str(hour_fr) in hours:
-                    hour_fr = "0%s" % hour_fr
-            pubdate = pretime.replace(hour_utc, str(hour_fr))
             value = re.search(r'S[0-9]{2}E[0-9]{2}', title)
-            verif = "[PRE] %s" % title
             if (value is None) and ((cat == "DVDR" or cat == "BLURAY")\
                     or (cat == "X264" and "bluray" in title.lower())):
-                id = "[PRE] %s [ %s ] %s" % (title, size, pubdate)
+                verif = "[PRE] %s" % title
                 if (verif.lower() not in filetext.lower()):
+                    size = smart_str(entry.description).replace('<br />', '')\
+                                                       .replace('Size', ' | Size').strip()
+                    pretime = smart_str(entry.published).replace('+0000', '').strip()
+                    hour_utc = pretime.split(' ')[4].split(':')[0]
+                    if (hour_utc == "21"):
+                        hour_fr = "00"
+                    elif (hour_utc == "22"):
+                        hour_fr = "01"
+                    elif (hour_utc == "23"):
+                        hour_fr = "02"
+                    else:
+                        hour_fr = int(hour_utc)+3
+                        hours = "3 4 5 6 7 8 9"
+                        if str(hour_fr) in hours:
+                            hour_fr = "0%s" % hour_fr
+                    pubdate = pretime.replace(hour_utc, str(hour_fr))
+                    id = "[PRE] %s [ %s ] %s" % (title, size, pubdate)
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
@@ -139,12 +139,12 @@ def update_sources():
         hdt = feedparser.parse(HDT)
         for entry in hdt.entries:
             title = smart_str(entry.title).strip()
-            link = smart_str(entry.link).strip()
             if ("1080p" in title and "XXX" not in title)\
                     and ("bluray" in title.lower() or "blu-ray" in title.lower()):
-                id = "[HDT] %s : %s" % (title, link)
-                verif = "[HDT] %s" % title
+                link = smart_str(entry.link).strip()
+                verif = link.split('id=')[1]
                 if (verif.lower() not in filetext.lower()):
+                    id = "[HDT] %s : %s" % (title, link)
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
