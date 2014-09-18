@@ -143,7 +143,8 @@ def update_sources():
             if ("1080p" in title and "XXX" not in title)\
                     and ("bluray" in title.lower() or "blu-ray" in title.lower()):
                 id = "[HDT] %s : %s" % (title, link)
-                if (id.lower() not in filetext.lower()):
+                verif = "[HDT] %s" % title
+                if (verif.lower() not in filetext.lower()):
                     get_hist = open(hist, "a")
                     get_hist.write("%s\n" % id)
                     get_hist.close()
