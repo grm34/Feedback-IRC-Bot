@@ -34,7 +34,7 @@ SUBSYNC = "http://www.subsynchro.com/les-20-derniers-sous-titres-ajoutes.xml"
 OPENSUB = "http://www.opensubtitles.org/fr/search/sublanguageid-fre/searchonlymovies-on/rss_2_00"
 
 def update_sources():
-    get_hist = open(hist, "r")
+    get_hist = open(hist_sources, "r")
     filetext = get_hist.read()
     get_hist.close()
     try:
@@ -63,56 +63,56 @@ def update_sources():
                         if str(hour_fr) in hours:
                             hour_fr = "0%s" % hour_fr
                     pubdate = pretime.replace(hour_utc, str(hour_fr))
-                    id = "[PRE] %s [ %s ] %s" % (title, size, pubdate)
-                    get_hist = open(hist, "a")
-                    get_hist.write("%s\n" % id)
+                    msg = "[PRE] %s [ %s ] %s" % (title, size, pubdate)
+                    get_hist = open(hist_sources, "a")
+                    get_hist.write("%s\n" % msg)
                     get_hist.close()
-                    msgqueue.append(id)
+                    msgqueue.append(msg)
 
         scc = feedparser.parse(SCC)
         for entry in scc.entries:
-            title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
-            id = "[SCC] %s : %s" % (title, link)
-            if (id.lower() not in filetext.lower()):
-                get_hist = open(hist, "a")
-                get_hist.write("%s\n" % id)
+            if (smart_str(link) not in filetext):
+                title = smart_str(entry.title).strip()
+                msg = "[SCC] %s : %s" % (title, link)
+                get_hist = open(hist_sources, "a")
+                get_hist.write("%s\n" % msg)
                 get_hist.close()
-                msgqueue.append(id)
+                msgqueue.append(msg)
 
         gft = feedparser.parse(GFT)
         for entry in gft.entries:
-            title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
-            id = "[GFT] %s : %s" % (title, link)
-            if (id.lower() not in filetext.lower()):
-                get_hist = open(hist, "a")
-                get_hist.write("%s\n" % id)
+            if (smart_str(link) not in filetext):
+                title = smart_str(entry.title).strip()
+                msg = "[GFT] %s : %s" % (title, link)
+                get_hist = open(hist_sources, "a")
+                get_hist.write("%s\n" % msg)
                 get_hist.close()
-                msgqueue.append(id)
+                msgqueue.append(msg)
 
         st_eu = feedparser.parse(ST_EU)
         for entry in st_eu.entries:
-            title = smart_str(entry.title).strip()
             link = smart_str(entry.link).strip()
-            id = "[ST-EU] %s : %s" % (title, link)
-            if (id.lower() not in filetext.lower()):
-                get_hist = open(hist, "a")
-                get_hist.write("%s\n" % id)
+            if (smart_str(link) not in filetext):
+                title = smart_str(entry.title).strip()
+                msg = "[ST-EU] %s : %s" % (title, link)
+                get_hist = open(hist_sources, "a")
+                get_hist.write("%s\n" % msg)
                 get_hist.close()
-                msgqueue.append(id)
+                msgqueue.append(msg)
 
         subscene = BeautifulSoup(urlopen(SUBSCENE))
         for entry in subscene.findAll('dt', id='a1W'):
             data = entry.find('a')
-            title = data.get('title').split('-')[1].strip()
             link = "http://subscene.com%s" % data.get('href').strip()
-            id = "[SUBSCENE] %s : %s" % (smart_str(title), smart_str(link))
-            if (id.lower() not in filetext.lower()):
-                get_hist = open(hist, "a")
-                get_hist.write("%s\n" % id)
+            if (smart_str(link) not in filetext):
+                title = data.get('title').split('-')[1].strip()
+                msg = "[SUBSCENE] %s : %s" % (smart_str(title), smart_str(link))
+                get_hist = open(hist_sources, "a")
+                get_hist.write("%s\n" % msg)
                 get_hist.close()
-                msgqueue.append(id)
+                msgqueue.append(msg)
 
         subsync = feedparser.parse(SUBSYNC)
         for entry in subsync.entries:
@@ -120,22 +120,22 @@ def update_sources():
             verif = "[SUBSYNC] %s" % title
             if (verif.lower() not in filetext.lower()):
                 link = smart_str(entry.link).strip()
-                id = "[SUBSYNC] %s : %s" % (title, link)                
-                get_hist = open(hist, "a")
-                get_hist.write("%s\n" % id)
+                msg = "[SUBSYNC] %s : %s" % (title, link)
+                get_hist = open(hist_sources, "a")
+                get_hist.write("%s\n" % msg)
                 get_hist.close()
-                msgqueue.append(id)
+                msgqueue.append(msg)
 
         opensub = feedparser.parse(OPENSUB)
         for entry in opensub.entries:
-            title = smart_str(entry.title).split('-')[0].strip()
             link = smart_str(entry.link).strip()
-            id = "[OPENSUB] %s : %s" % (title, link)
-            if (id.lower() not in filetext.lower()):
-                get_hist = open(hist, "a")
-                get_hist.write("%s\n" % id)
+            if (smart_str(link) not in filetext):
+                title = smart_str(entry.title).split('-')[0].strip()
+                msg = "[OPENSUB] %s : %s" % (title, link)
+                get_hist = open(hist_sources, "a")
+                get_hist.write("%s\n" % msg)
                 get_hist.close()
-                msgqueue.append(id)
+                msgqueue.append(msg)
 
         hdt = feedparser.parse(HDT)
         for entry in hdt.entries:
@@ -145,89 +145,35 @@ def update_sources():
                 link = smart_str(entry.link).strip()
                 verif = link.split('id=')[1]
                 if (verif.lower() not in filetext.lower()):
-                    id = "[HDT] %s : %s" % (title, link)
-                    get_hist = open(hist, "a")
-                    get_hist.write("%s\n" % id)
+                    msg = "[HDT] %s : %s" % (title, link)
+                    get_hist = open(hist_sources, "a")
+                    get_hist.write("%s\n" % msg)
                     get_hist.close()
-                    msgqueue.append(id)
+                    msgqueue.append(msg)
 
         chd = feedparser.parse(CHD)
         for entry in chd.entries:
             title = smart_str(entry.title).strip()
-            link = smart_str(entry.link).strip()
             if ("HDTV" not in title and "PDTV" not in title):
-                id = "[CHD] %s : %s" % (title, link)
-                if (id.lower() not in filetext.lower()):
-                    get_hist = open(hist, "a")
-                    get_hist.write("%s\n" % id)
+                link = smart_str(entry.link).strip()
+                if (smart_str(link) not in filetext):
+                    msg = "[CHD] %s : %s" % (title, link)
+                    get_hist = open(hist_sources, "a")
+                    get_hist.write("%s\n" % msg)
                     get_hist.close()
-                    msgqueue.append(id)
+                    msgqueue.append(msg)
 
     except (HTTPError, KeyError, URLError) as e:
-        server.notice(bot_owner, "[Feedback Error] "+str(e))
+        server.notice(bot_owner, "[RSS ERROR] "+str(e))
         pass
 
-    threading.Timer(30.0, update_sources).start()
-
-def on_welcome(server, event):
-    if (password):
-        server.privmsg("nickserv", "IDENTIFY %s" % password)
-        server.privmsg("chanserv", "SET irc_auto_rejoin ON")
-        server.privmsg("chanserv", "SET irc_join_delay 0")
-    server.join(chan)
-
-def on_kick(server, event):
-    server.join(chan)
-
-def on_privmsg(server, event):
-    author = irclib.nm_to_n(event.source())
-    message = event.arguments()[0].strip()
-    arguments = message.split(' ')
-    nombreArg = len(arguments)
-
-    if (author == bot_owner):
-        if ('!say' == arguments[0]):
-            server.privmsg(chan, message.replace('!say', '')[1:])
-        elif ('!act' == arguments[0]):
-            server.action(chan, message.replace('!act', '')[1:])
-        elif ('!j' == arguments[0]):
-            server.join(message[3:])
-        elif ('!p' == arguments[0]):
-            server.part(message[3:])
-        else:
-            server.privmsg(author, "n00b "+author+" ! "
-                "Tu causes à ton bot là !")
-    else:
-        server.privmsg(author, "Hey "+author+", t'as craqué ou quoi ? "\
-            "Tu causes à un bot là, spice de n00b !")
-
-def on_pubmsg(server, event):
-    author = irclib.nm_to_n(event.source())
-    message = event.arguments()[0].strip()
-    arguments = message.split(' ')
-    nombreArg = len(arguments)
-
-    if (author == bot_owner and nombreArg == 1 and '!exit' == arguments[0]):
-        server.disconnect("See you later girls, just need a break !")
-        if (kill_bot):
-            os.system(kill_bot)
-
-irclib.DEBUG = 1
-irc = irclib.IRC()
-server = irc.server()
-irc.add_global_handler ('welcome', on_welcome)
-irc.add_global_handler ('kick', on_kick)
-irc.add_global_handler ('privmsg', on_privmsg)
-irc.add_global_handler ('pubmsg', on_pubmsg)
-server.connect(network, port, nick, ircname=name, ssl=False)
-
-update_sources()
+    threading.Timer(20.0, update_sources).start()
 
 def main():
     while (1):
         while (len(msgqueue) > 0):
-            msg = msgqueue.pop()
-            server.privmsg(chan, msg)
+            msg_chan = msgqueue.pop()
+            server.privmsg(chan, msg_chan)
         time.sleep(1)
         irc.process_once()
         time.sleep(1)
