@@ -82,9 +82,10 @@ def update_sources():
 
         gft = feedparser.parse(GFT)
         for entry in gft.entries:
-            link = smart_str(entry.link).strip()
-            if (smart_str(link) not in filetext):
-                title = smart_str(entry.title).strip()
+            title = smart_str(entry.title).strip()
+            verif = "[GFT] %s" % title
+            if (verif.lower() not in filetext.lower()):
+                link = smart_str(entry.link).strip()
                 msg = "[GFT] %s : %s" % (title, link)
                 get_hist = open(hist_sources, "a")
                 get_hist.write("%s\n" % msg)
