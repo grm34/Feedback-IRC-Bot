@@ -1,4 +1,4 @@
-Feedback-IRC-Bots
+Feedback-IRC-Bot
 =================
 
 ## gitbot
