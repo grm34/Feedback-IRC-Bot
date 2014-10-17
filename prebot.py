@@ -22,7 +22,7 @@ name = 'P2P Feedback News'
 password = '' # nickserv password
 kill_bot = '' # When screen in use... 'screen -X -S screen_name kill'
 msgqueue = [] # please, leave this empty ! :p
-hist = os.environ.get("HOME")+"/prebot/hist.entry"
+hist_sources = os.environ.get("HOME")+"/prebot/hist.entry"
 
 PRE = "" # PRE Announce from : https://pre.corrupt-net.org/ passkey needed !
 SCC = "" # what's this ?
